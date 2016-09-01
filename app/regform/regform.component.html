@@ -1,1 +1,56 @@
-<h1>Registration</h1>
+<section class="col-xs-7 col-md-5">
+
+<h2 class="center">Registration</h2>
+
+<form class="form-horizontal" *ngIf="active" (ngSubmit)="onSubmit()" #personForm="ngForm">
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" class="form-control" [(ngModel)]="person.firstName" name="firstName" #firstName="ngModel"
+      placeholder="John" required />
+    <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+      First name is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input type="text" class="form-control" [(ngModel)]="person.lastName" name="lastName" #lastName="ngModel"
+      placeholder="Doe" required />
+    <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+      Last name is required
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" [(ngModel)]="person.email" name="email" #email="ngModel"
+      placeholder="johndoe@example.com" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+      Enter valid email
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="birthday">Birthday</label>
+    <input type="date" class="form-control" [(ngModel)]="person.dateOfBirth || birthday.pristine" name="birthday" #birthday="ngModel" />
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" [(ngModel)]="person.password" name="password" #password="ngModel"
+      required />
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+      Password is required
+    </div>
+  </div>
+  <button type="submit" class="btn btn-default" [disabled]="!personForm.form.valid">Submit</button>
+</form>
+</section>
+
+<section class="col-md-7 col-xs-5">
+  <article>
+    <h2>Results</h2>
+    <br />
+    <p>First name: {{ person.firstName }}</p>
+    <p>Last name: {{ person.lastName }}</p>
+    <p>Email: {{ person.email }}</p>
+    <p>Date of birth: {{ person.dateOfBirth }}</p>
+    <p>Password: {{ person.password }}</p>
+  </article>
+</section>

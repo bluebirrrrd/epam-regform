@@ -28,10 +28,10 @@ describe('RegformComponent with TCB', function () {
     let fixture = TestBed.createComponent(RegformComponent);
     fixture.detectChanges();
 
-    let h1 = fixture.debugElement.query(el => el.name === 'h1').nativeElement;  // it works
+    let h2 = fixture.debugElement.query(el => el.name === 'h2').nativeElement;  // it works
 
-        h1 = fixture.debugElement.query(By.css('h1')).nativeElement;            // preferred
+        h2 = fixture.debugElement.query(By.css('h2')).nativeElement;            // preferred
 
-    expect(h1.innerText).toMatch(/Registration/i, '<h1> should say something about "Registration"');
+    expect(h2.innerText).toMatch(/Registration/i, '<h2> should say something about "Registration"');
   });
 });
