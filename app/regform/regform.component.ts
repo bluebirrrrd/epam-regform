@@ -12,6 +12,12 @@ export class RegformComponent implements OnInit {
 
     person = new Person('John','Doe','john.doe@example.com','', new Date());
     active = true;
+    submitted = false;
+    
     ngOnInit(): void {
+    }
+
+    onSubmit(): void {
+        this.submitted = true;
     }
 }
