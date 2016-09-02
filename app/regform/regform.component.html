@@ -3,6 +3,7 @@
 <h2 class="center">Registration</h2>
 
 <form class="form-horizontal" *ngIf="active" (ngSubmit)="onSubmit()" #personForm="ngForm">
+
   <div class="form-group">
     <label for="firstName">First name</label>
     <input type="text" class="form-control" [(ngModel)]="person.firstName" name="firstName" #firstName="ngModel"
@@ -11,6 +12,7 @@
       First name is required
     </div>
   </div>
+
   <div class="form-group">
     <label for="lastName">Last name</label>
     <input type="text" class="form-control" [(ngModel)]="person.lastName" name="lastName" #lastName="ngModel"
@@ -19,6 +21,7 @@
       Last name is required
     </div>
   </div>
+
   <div class="form-group">
     <label for="email">Email</label>
     <input type="email" class="form-control" [(ngModel)]="person.email" name="email" #email="ngModel"
@@ -27,10 +30,28 @@
       Enter valid email
     </div>
   </div>
+
   <div class="form-group">
-    <label for="birthday">Birthday</label>
-    <input type="date" class="form-control" [(ngModel)]="person.dateOfBirth || birthday.pristine" name="birthday" #birthday="ngModel" />
+    <label for="birthday">Date of birth</label>
+    <input type="date" class="form-control" [(ngModel)]="person.dateOfBirth" name="birthday" #birthday="ngModel" />
+    <div [hidden]="birthday.valid || birthday.pristine" class="alert alert-danger">
+      Date of birth is required
+    </div>
   </div>
+
+  <div class="form-group">
+    <label for="country">Country</label>
+    <select class="form-control" [(ngModel)]="person.country" name="country" #country="ngModel"
+    required>
+      <option *ngFor="let country of countries" value={{country.code}}>
+        {{country.name}}
+      </option>
+    </select>
+    <div [hidden]="country.valid || country.pristine" class="alert alert-danger">
+      Country is required
+    </div>
+  </div>
+
   <div class="form-group">
     <label for="password">Password</label>
     <input type="password" class="form-control" [(ngModel)]="person.password" name="password" #password="ngModel"
@@ -39,6 +60,23 @@
       Password is required
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirm password</label>
+    <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="pass" #confirmPassword="ngModel"
+      required />
+    <div [hidden]="confirmPassword.pristine || pass == person.password" class="alert alert-danger">
+      Passwords must match
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="checkbox" name="agree" [(ngModel)]="agree" #terms="ngModel" required/>I agree with terms and conditions
+    <div [hidden]="terms.pristine || terms.valid" class="alert alert-danger">
+      You must agree to terms and conditions
+    </div>
+  </div>
+
   <button type="submit" class="btn btn-default" [disabled]="!personForm.form.valid">Submit</button>
 </form>
 </section>
@@ -51,6 +89,8 @@
     <p>Last name: {{ person.lastName }}</p>
     <p>Email: {{ person.email }}</p>
     <p>Date of birth: {{ person.dateOfBirth }}</p>
+    <p>Postal index: {{ person.postalIndex }}</p>
+    <p>Country: {{ person.country }}</p>
     <p>Password: {{ person.password }}</p>
     <p>Submitted: {{submitted}}</p>
   </article>
