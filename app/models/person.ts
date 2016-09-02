@@ -4,6 +4,8 @@ export class Person {
         lastName: String,
         email: String,
         password: String,
-        dateOfBirth?: Date
+        dateOfBirth: Date,
+        postalIndex: String,
+        country: String
     ) { };
 }
